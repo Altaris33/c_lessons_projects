@@ -167,11 +167,37 @@ int main() {
         return 1;
     }
 
+    // person->name is shorthand for (*person).name
+    // person.name       structure itself
+    // person->name      pointer to structure
     strcpy(person->name, "Alice");
     person->age = 25;
     printf("Person name: %s\n", person->name);
     printf("Person age: %d\n", person->age);
     free(person);
+
+    // Memory Leaks
+    // One of the biggest problems with dynamic memory is forgetting to release it
+    int *value = malloc(100 * sizeof(int));
+
+    // from here on: the allocated memory still exists. But its address has been lost. The memory cannot be freed anymore
+    // this is called a memory leak
+    value = NULL;
+
+    // TODO create a meaningful example of a memory leak over time
+
+    // Dangling pointers
+    int *value2 = malloc(sizeof *value2);
+
+    *value2 = 42;
+
+    free(value2);
+
+    // after freeing value2, value2 still contains the old address
+    // but we are no longer own the memory of that address
+    // *value2 is now a dangling pointer
+    // Dereferencing it result in Undefined Behavior
+    printf("%d\n", *value2); // DANGEROUS
 
     return 0;
 }
