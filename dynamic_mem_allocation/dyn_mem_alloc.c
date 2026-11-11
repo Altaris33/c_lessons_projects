@@ -199,5 +199,17 @@ int main() {
     // Dereferencing it result in Undefined Behavior
     printf("%d\n", *value2); // DANGEROUS
 
+    int *ptr = malloc(10 * sizeof *ptr);
+    int *another_ptr = ptr;
+
+    free(ptr);
+    ptr = NULL;
+    // another_ptr is still a dangling pointer
+
+    // Out-of-bounds access
+    // *value3 behave like a 5 slots array
+    int *value3 = malloc(5 * sizeof *value3);
+    value3[5] = 5; // Out-of-bounds access
+
     return 0;
 }
