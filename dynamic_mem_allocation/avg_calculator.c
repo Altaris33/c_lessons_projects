@@ -36,6 +36,8 @@ int main() {
     
     printf("Sum : %.2lf\n", sum);
     printf("Avg : %.2lf\n", (sum / n));
+
+    free(values);
     
     return 0;
 }
